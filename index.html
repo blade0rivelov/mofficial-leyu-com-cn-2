@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>乐鱼体育 · 日常查询与对照指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f7f9fc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* hero */
+    .hero {
+      padding: 72px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid #e6edf5;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0b1a2b;
+    }
+    .hero .sub {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: #5a6b7c;
+      letter-spacing: 0.3px;
+    }
+    .hero .sub span {
+      background: #eef3fa;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    /* 背景说明卡片 */
+    .backdrop-note {
+      margin: 40px 0 32px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px 32px 28px;
+      box-shadow: 0 2px 8px rgba(0, 20, 40, 0.04);
+    }
+    .backdrop-note h2 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #1e3a5f;
+      margin-bottom: 18px;
+      border-left: 4px solid #9bb7d4;
+      padding-left: 16px;
+    }
+    .backdrop-note p {
+      font-size: 0.98rem;
+      color: #2c3e50;
+      margin-bottom: 14px;
+    }
+    .backdrop-note p:last-child {
+      margin-bottom: 0;
+    }
+    .backdrop-note .quiet-hint {
+      color: #6f7e91;
+      font-size: 0.88rem;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed #dee8f2;
+    }
+
+    /* 三段自然介绍 */
+    .section-triplet {
+      margin: 28px 0 28px;
+    }
+    .triptych {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .triptych .item {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 28px 28px 26px;
+      transition: box-shadow 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+    .triptych .item h3 {
+      font-size: 1.12rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      color: #1b2d44;
+    }
+    .triptych .item h3 .step-num {
+      font-size: 0.8rem;
+      color: #8da3bb;
+      font-weight: 400;
+    }
+    .triptych .item p {
+      font-size: 0.96rem;
+      color: #31475e;
+    }
+    .triptych .item p + p {
+      margin-top: 12px;
+    }
+    .triptych .item .inline-link-sentence {
+      font-size: 0.96rem;
+      margin-top: 8px;
+    }
+    .triptych .item .inline-link-sentence a {
+      color: #1f5a8c;
+      text-decoration: none;
+      border-bottom: 1px dotted #b8ccdf;
+    }
+    .triptych .item .inline-link-sentence a:hover {
+      border-bottom: 1px solid #1f5a8c;
+    }
+
+    /* 提示 + faq 摘要混合 */
+    .note-area {
+      background: #f2f6fb;
+      border-radius: 20px;
+      padding: 30px 28px;
+      margin: 36px 0 48px;
+    }
+    .note-area h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1e3a5f;
+      margin-bottom: 16px;
+    }
+    .note-area .faq-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .note-area .faq-mini .qa {
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+    .note-area .faq-mini .qa strong {
+      font-weight: 500;
+      color: #0b1f32;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .note-area .faq-mini .qa span {
+      color: #3b536b;
+    }
+    .note-area .visit-tip {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      background: #ffffffd8;
+      padding: 14px 18px;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+      border: 1px solid #d9e4ef;
+      color: #1b2d3f;
+    }
+    .note-area .visit-tip a {
+      color: #1f5a8c;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid #b1c9de;
+    }
+    .note-area .visit-tip a:hover {
+      border-bottom: 1px solid #1f5a8c;
+    }
+
+    /* 页尾 */
+    .page-footer {
+      padding: 38px 0 48px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7f8fa3;
+      border-top: 1px solid #e1eaf2;
+    }
+    .page-footer .footer-inline-link a {
+      color: #4d6b89;
+      text-decoration: none;
+      border-bottom: 1px dashed #bccfdf;
+    }
+    .page-footer .footer-inline-link a:hover {
+      border-bottom: 1px solid #4d6b89;
+    }
+
+    /* 响应式 */
+    @media (max-width: 520px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .backdrop-note,
+      .triptych .item,
+      .note-area {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .page {
+        padding: 0 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <header class="hero">
+    <h1>乐鱼体育</h1>
+    <div class="sub">
+      <span>日常查询 · 对照阅读</span>
+    </div>
+    <div style="margin-top:10px;font-size:0.78rem;color:#9aacbf;">一个更安静的参考页</div>
+  </header>
+
+  <!-- 背景说明 -->
+  <section class="backdrop-note">
+    <h2>关于这个页面</h2>
+    <p>在体育信息浏览中，我们常常需要快速对照、延伸阅读，而并非每次都要从头导航。这份杂志式的简页围绕 <a href="https://mofficial-leyu.com.cn" style="color:#1f5a8c;text-decoration:none;border-bottom:1px dotted #b3c9dd;">乐鱼体育</a> 的日常使用场景，梳理了几个常见的查询与理解角度，方便随手翻阅。</p>
+    <p>内容不追求包装，只提供平实的整理。下面的三段介绍分别对应我经常用到的三个动作：查赛事背景、对比信息维度、以及做笔记式的回顾。</p>
+    <div class="quiet-hint">—— 基于日常浏览习惯整理 · 背景说明</div>
+  </section>
+
+  <!-- 三段自然介绍（杂志式） -->
+  <section class="section-triplet">
+    <div class="triptych">
+
+      <div class="item">
+        <h3><span class="step-num">01</span> 查赛事背景</h3>
+        <p>不管是联赛、杯赛还是区域性对抗，先了解背景总是更踏实。我通常会在 <a href="https://mofficial-leyu.com.cn" style="color:#1f5a8c;text-decoration:none;border-bottom:1px dotted #b3c9dd;">乐鱼体育</a> 里快速定位赛事页面，不需要注册就能看到基础信息、赛季走势和历史交锋。省去到处搜索的时间，直接进入阅读状态。</p>
+        <p class="inline-link-sentence">比如周末想回顾一场经典对决，习惯先打开<a href="https://mofficial-leyu.com.cn">乐鱼体育</a>对照阵容和当时的数据，心里就有底了。</p>
+      </div>
+
+      <div class="item">
+        <h3><span class="step-num">02</span> 对照信息维度</h3>
+        <p>同一场比赛，不同平台给出的统计口径经常有出入。我的习惯是同时打开两三个页面做比对，而乐鱼体育的呈现方式比较克制，数字和注释都列得清楚，适合作为参考基准。尤其在看球员数据、球队跑动距离这类细节时，对照着读会更有收获。</p>
+        <p class="inline-link-sentence">这种对照阅读让我慢慢理解了数据背后的战术逻辑，而不再只是看比分。</p>
+      </div>
+
+      <div class="item">
+        <h3><span class="step-num">03</span> 笔记式的回顾</h3>
+        <p>体育内容适合反复琢磨。我会把感兴趣的比赛页面保留在标签栏，过几天再重新打开<a href="https://mofficial-leyu.com.cn">乐鱼体育</a>看同一场比赛的分析角度有没有更新，或者自己当时的判断是否准确。这种缓慢的回顾方式，比追着新闻跑更舒服。</p>
+        <p class="inline-link-sentence">有时也会把重点段落截图，存在自己的阅读档案里，形成个人的体育笔记。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 提示 + FAQ 摘要 -->
+  <section class="note-area">
+    <h4>一些延伸与提示</h4>
+    <div class="faq-mini">
+      <div class="qa">
+        <strong>Q：日常查询时需要注意什么？</strong>
+        <span>建议优先使用 PC 浏览器打开，页面呈现更完整；移动端也可正常浏览。数据更新以页面标注的时间为准。</span>
+      </div>
+      <div class="qa">
+        <strong>Q：如何快速找到之前看过的内容？</strong>
+        <span>可以借助浏览器书签，或者直接搜索关键词。乐鱼体育的页面结构比较规整，关键词匹配度高。</span>
+      </div>
+    </div>
+    <div class="visit-tip">
+      📎 如果你也习惯把体育信息当作日常阅读素材，不妨直接去 <a href="https://mofficial-leyu.com.cn">乐鱼体育</a> 看看。页面干净，适合安静地对照与延伸。
+    </div>
+  </section>
+
+  <!-- 页尾 -->
+  <footer class="page-footer">
+    <div class="footer-inline-link">
+      本页仅为阅读辅助，内容与 <a href="https://mofficial-leyu.com.cn">乐鱼体育</a> 无捆绑关系。
+    </div>
+    <div style="margin-top:12px; opacity:0.6;">杂志式参考 · 日常查询页</div>
+  </footer>
+
+</div>
+</body>
+</html>
