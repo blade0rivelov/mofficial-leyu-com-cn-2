@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开元棋牌 · 信息速览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f5f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e1e2f;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- hero 主视觉卡片 --- */
+        .hero-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e8eaed;
+            padding: 2.8rem 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card:hover {
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+        }
+
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: #0b1a2b;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #3e4a5a;
+            max-width: 680px;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #eef1f5;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            color: #2d3e55;
+            border: 1px solid #dce0e6;
+            margin-right: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* --- 卡片网格 --- */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02), 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e4e7ec;
+            padding: 1.8rem 1.6rem 2rem;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            display: inline-block;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0.5rem 0 0.4rem 0;
+            color: #1a293b;
+        }
+
+        .card-text {
+            color: #2d3b4b;
+            font-size: 0.95rem;
+        }
+
+        .card-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .card-text li {
+            padding: 0.2rem 0 0.2rem 1.2rem;
+            position: relative;
+        }
+
+        .card-text li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #5f7a9a;
+            font-weight: 600;
+        }
+
+        .tag-group {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 0.6rem;
+        }
+
+        .tag {
+            background: #f0f2f6;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #2d4059;
+            border: 1px solid #dde1e9;
+        }
+
+        /* --- 适合人群卡片（横跨） --- */
+        .full-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e4e7ec;
+            padding: 1.8rem 1.8rem 2.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .full-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a293b;
+        }
+
+        .profile-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.8rem;
+        }
+
+        .profile-item {
+            flex: 1 1 180px;
+            background: #f8f9fc;
+            border-radius: 18px;
+            padding: 0.8rem 1rem 0.9rem;
+            border: 1px solid #e9ecf1;
+        }
+
+        .profile-item strong {
+            display: block;
+            font-weight: 600;
+            color: #0f1e2e;
+        }
+
+        .profile-item span {
+            font-size: 0.88rem;
+            color: #3b4c60;
+        }
+
+        /* --- 自然链接段落 --- */
+        .link-section {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e4e7ec;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .link-section p {
+            font-size: 0.98rem;
+            color: #1e2d3e;
+            margin-bottom: 0.8rem;
+        }
+
+        .link-section a {
+            color: #1b5d8c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(27, 93, 140, 0.3);
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .link-section a:hover {
+            border-bottom-color: #1b5d8c;
+            color: #0a3a5c;
+        }
+
+        /* --- FAQ 摘要（简洁卡片） --- */
+        .faq-mini {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e4e7ec;
+            padding: 1.6rem 1.8rem 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-mini h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #152433;
+        }
+
+        .faq-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f2f6;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1e334b;
+        }
+
+        .faq-a {
+            color: #3b4d62;
+            font-size: 0.9rem;
+            margin-top: 0.1rem;
+        }
+
+        /* --- 页脚 --- */
+        .footer-note {
+            text-align: center;
+            color: #6a7b8e;
+            font-size: 0.85rem;
+            padding: 1.5rem 0 0.2rem;
+            border-top: 1px solid #e0e3e9;
+            margin-top: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 720px) {
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .hero-title {
+                font-size: 1.9rem;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .profile-grid {
+                flex-direction: column;
+            }
+            .profile-item {
+                flex: 1 1 auto;
+            }
+            .link-section {
+                padding: 1.4rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+            .hero-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 主视觉 -->
+    <div class="hero-card">
+        <div class="hero-title">开元棋牌</div>
+        <div class="hero-sub">一个围绕棋牌类游戏场景提供信息、规则说明与策略参考的内容站点。适合快速定位游戏类型与入门指引。</div>
+        <div>
+            <span class="hero-badge">棋牌百科</span>
+            <span class="hero-badge">规则速查</span>
+            <span class="hero-badge">玩法分类</span>
+            <span class="hero-badge">策略笔记</span>
+        </div>
+    </div>
+
+    <!-- 两列用途卡片 -->
+    <div class="grid-2">
+        <div class="info-card">
+            <div class="card-icon">📋</div>
+            <div class="card-title">用途整理</div>
+            <div class="card-text">
+                帮助使用者快速理解不同棋牌项目的基本规则、牌型组合及计分方式。涵盖常见主流玩法与地方变体。
+                <ul>
+                    <li>规则说明 · 术语解释</li>
+                    <li>牌型图解 · 番型速览</li>
+                    <li>计分逻辑 · 流程拆解</li>
+                </ul>
+                <div class="tag-group">
+                    <span class="tag">斗地主</span>
+                    <span class="tag">麻将</span>
+                    <span class="tag">德州扑克</span>
+                    <span class="tag">桥牌</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-icon">🔍</div>
+            <div class="card-title">场景辅助</div>
+            <div class="card-text">
+                面向线下聚会、线上约局、新手学习等场景提供结构化的内容参考。每项说明尽量保持中立、简洁。
+                <ul>
+                    <li>新手入门 · 常见疑问</li>
+                    <li>局前准备 · 规则确认</li>
+                    <li>策略概述 · 进阶方向</li>
+                </ul>
+                <div class="tag-group">
+                    <span class="tag">家庭娱乐</span>
+                    <span class="tag">朋友对局</span>
+                    <span class="tag">自学参考</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 适合人群 (全宽卡片) -->
+    <div class="full-card">
+        <h3>👥 适合人群</h3>
+        <div class="profile-grid">
+            <div class="profile-item">
+                <strong>棋牌新手</strong>
+                <span>希望系统了解规则、消除疑惑，建立基础认知。</span>
+            </div>
+            <div class="profile-item">
+                <strong>休闲玩家</strong>
+                <span>平时偶尔参与，需要快速查阅规则或计分细节。</span>
+            </div>
+            <div class="profile-item">
+                <strong>规则讲解者</strong>
+                <span>组织活动或教学时，作为结构化参考材料。</span>
+            </div>
+            <div class="profile-item">
+                <strong>策略爱好者</strong>
+                <span>对牌型概率、决策逻辑感兴趣，想阅读整理后的思路。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-section">
+        <p>如果你正在寻找一个结构化的棋牌内容站点，可以浏览 <a href="https://to-kaiyuan.com">开元棋牌</a> 上的分类页面。站内按游戏类型整理规则说明、常见问题及部分策略笔记，方便按需查阅。</p>
+        <p>无论是线下聚会前确认规则细节，还是想了解某种玩法的计分逻辑，<a href="https://to-kaiyuan.com">开元棋牌</a> 都提供了相对完整的条目式说明。内容保持中立和实用，不涉及任何实际对局或金钱交易引导。</p>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-mini">
+        <h4>❓ 常见疑问摘要</h4>
+        <div class="faq-item">
+            <div class="faq-q">· 站内包含哪些棋牌项目？</div>
+            <div class="faq-a">现阶段覆盖斗地主、四川麻将、德州扑克、桥牌、掼蛋等主流玩法，并逐步补充地方变体规则。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">· 内容会定期更新吗？</div>
+            <div class="faq-a">是的，页面会根据玩法演变和用户反馈补充细节，每次更新都会保持说明的清晰度。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">· 是否有策略或技巧内容？</div>
+            <div class="faq-a">有部分策略笔记，偏向基础思路和常见局面分析，不包含必胜承诺或诱导性表述。</div>
+        </div>
+        <div class="faq-item" style="border-bottom: none;">
+            <div class="faq-q">· 适合完全零基础的人吗？</div>
+            <div class="faq-a">适合。规则说明从术语定义开始，逐步到完整流程，新手可以按顺序阅读。</div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+        信息卡片 · 内容仅供参考，不构成任何游戏建议。
+    </div>
+
+</div>
+</body>
+</html>
