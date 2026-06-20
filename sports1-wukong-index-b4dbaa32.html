@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>悟空体育 · 日常查询与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #1e2a3a;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 — 信息卡片式主视觉 */
+        .hero {
+            background: linear-gradient(145deg, #0b1a2b 0%, #162d44 100%);
+            padding: 3.5rem 1.5rem 4rem;
+            text-align: center;
+            color: #eef3f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #f5f7fa;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero p {
+            max-width: 640px;
+            margin: 0.8rem auto 0;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .hero .sub-annotation {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.25rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #b6d0e6;
+        }
+
+        /* 浅色正文区 */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        /* 信息卡片通用样式 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 1.6rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #eef2f7;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 20, 50, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0b1a2b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 .icon {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #eef4fa;
+            border-radius: 50%;
+            line-height: 28px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #1d4b6e;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2b3f55;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3b7aa5;
+            font-weight: bold;
+        }
+
+        /* 适合人群卡片 - 差异化样式 */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.8rem 0;
+        }
+
+        .audience-item {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.4rem 1rem 1.2rem;
+            text-align: center;
+            border: 1px solid #e4ecf5;
+            transition: background 0.15s;
+        }
+
+        .audience-item .emoji-badge {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .audience-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #162d44;
+            margin-bottom: 0.25rem;
+        }
+
+        .audience-item p {
+            font-size: 0.85rem;
+            color: #3f5a72;
+            line-height: 1.4;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 2rem;
+            margin: 2.8rem 0 1.8rem;
+            border-left: 5px solid #1d4b6e;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            font-size: 1rem;
+        }
+
+        .link-paragraph a {
+            color: #1a5b84;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .link-paragraph a:hover {
+            color: #0b3e5c;
+            background: #edf4fb;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        /* 提示 / FAQ 摘要 卡片 */
+        .faq-note {
+            background: #eef6fe;
+            border-radius: 16px;
+            padding: 1.6rem 2rem;
+            margin: 2rem 0 2.5rem;
+            border: 1px solid #d6e4f2;
+        }
+
+        .faq-note h4 {
+            font-size: 1.1rem;
+            color: #0b2e47;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .faq-note details {
+            margin: 0.3rem 0;
+            border-bottom: 1px solid #d9e4ef;
+            padding: 0.6rem 0;
+        }
+
+        .faq-note details:last-child {
+            border-bottom: none;
+        }
+
+        .faq-note summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #1a4e6e;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .faq-note summary::marker {
+            color: #1d5b84;
+        }
+
+        .faq-note p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #2a4056;
+            padding-left: 0.3rem;
+        }
+
+        /* 脚注 */
+        .footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #778a9e;
+            border-top: 1px solid #dce5ef;
+            padding-top: 1.8rem;
+        }
+
+        .footer-note a {
+            color: #2d6080;
+            text-decoration: underline;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 0 1rem 2rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .link-paragraph {
+                padding: 1.5rem 1.2rem;
+            }
+            .faq-note {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 主视觉 Hero -->
+    <header class="hero">
+        <h1>悟空体育 · 信息卡片</h1>
+        <p>日常查询、对照与延伸阅读的参考页面<br>整理自公开资料与用户常见问询，内容保持平实、清晰</p>
+        <span class="sub-annotation">—— 卡片式索引 ——</span>
+    </header>
+
+    <main class="container">
+
+        <!-- 用途卡片 (特点/场景) -->
+        <section>
+            <h2 style="font-size: 1.4rem; font-weight: 500; color: #1d3852; margin-top: 1.5rem;">📋 日常用途与查询方向</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">🔍</span> 信息对照</h3>
+                    <p>快速检索运动资讯、赛事安排或相关说明，适合在多个页面间做粗略比对。卡片式整理有助于聚焦重点，减少重复跳转。</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">📎</span> 延伸阅读</h3>
+                    <p>将常规内容按主题划分，便于从中延伸查找更深度的报告或专题。保持结构干净，避免信息过载。</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">⚙️</span> 日常查询</h3>
+                    <p>针对运动基础数据、术语或常见规则，提供简洁卡片式说明。查询者可以快速定位自己关心的条目。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 适合人群 (差异化展示) -->
+        <section>
+            <h2 style="font-size: 1.4rem; font-weight: 500; color: #1d3852; margin-top: 2rem; ">🧑‍🤝‍🧑 适合哪些人阅读</h2>
+            <div class="audience-grid">
+                <div class="audience-item">
+                    <span class="emoji-badge">🏃</span>
+                    <h4>运动兴趣者</h4>
+                    <p>日常关注赛事与规则，希望获得简洁的信息索引</p>
+                </div>
+                <div class="audience-item">
+                    <span class="emoji-badge">📚</span>
+                    <h4>内容查阅者</h4>
+                    <p>需要快速核对运动相关概览，不依赖复杂导航</p>
+                </div>
+                <div class="audience-item">
+                    <span class="emoji-badge">🗂️</span>
+                    <h4>资料整理者</h4>
+                    <p>习惯以卡片形式收集信息，再进一步延伸阅读</p>
+                </div>
+                <div class="audience-item">
+                    <span class="emoji-badge">🔗</span>
+                    <h4>普通浏览者</h4>
+                    <p>偶尔查询运动话题，希望页面直白、克制</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 自然链接段落 (嵌入 a 标签) -->
+        <div class="link-paragraph">
+            <p style="margin-bottom: 0.6rem;">
+                如果你想了解更完整的运动内容索引，可以查看 <a href="https://sports1-wukong.com">悟空体育</a> 的页面，那里提供了更多细分板块和资源梳理。本卡片页仅作为日常参考，内容经过概括与筛选，方便快速浏览。
+            </p>
+            <p style="margin-top: 0.8rem; color: #3b5770;">
+                延伸阅读或对照查询时，不妨将本页与 <a href="https://sports1-wukong.com">悟空体育</a> 内的专题页配合使用，能获得更立体的信息体验。卡片式结构适合先建立整体印象，再深入具体条目。
+            </p>
+        </div>
+
+        <!-- 提示 / FAQ 摘要 -->
+        <section class="faq-note">
+            <h4>❓ 常见问题摘要</h4>
+            <details>
+                <summary>卡片中的信息是否持续更新？</summary>
+                <p>本页面主要汇总基础内容，不承诺实时同步。重大变化建议以 <a href="https://sports1-wukong.com" style="color: #1a5b84;">悟空体育</a> 上的最新信息为准。</p>
+            </details>
+            <details>
+                <summary>如何利用这些卡片做延伸阅读？</summary>
+                <p>每个卡片代表一个主题方向，你可以复制关键词到站内搜索框，或者直接通过链接跳转到相关栏目进行深度浏览。</p>
+            </details>
+            <details>
+                <summary>适合在手机端查看吗？</summary>
+                <p>本页采用响应式布局，卡片和字体在手机、平板上会自适应调整，阅读体验相对舒适。</p>
+            </details>
+        </section>
+
+        <!-- 一个小提示，兼顾克制的语调 -->
+        <p style="font-size: 0.9rem; color: #526d86; background: #f0f5fc; padding: 0.8rem 1.2rem; border-radius: 30px; margin-top: 1.5rem;">
+            ⚡ 提示：本页内容仅作为信息整理与参考，不构成任何导向性建议。请自行判断所查信息的适用性。
+        </p>
+
+        <footer class="footer-note">
+            <p>信息卡片式整理 · 日常查询与延伸阅读 · <a href="https://sports1-wukong.com">悟空体育</a></p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
